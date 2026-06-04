@@ -6,21 +6,18 @@ package.domain = org.yourname
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas,onnx,json
 
-# Your main filebuildozer android debug
-main = Scanner_Kivy_Mobile
-
 version = 1.0
 
-# ⚠️ These requirements match your imports
-requirements = python3,kivy,kivymd,opencv,openpyxl,pillow,pyzbar
+requirements = python3,kivy,kivymd,opencv,numpy,openpyxl,pillow,pyzbar
 
-# Permissions needed for camera + storage
 android.permissions = CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 android.api = 33
 android.minapi = 24
-android.ndk = 27b
+android.ndk = 25b
 android.archs = arm64-v8a
+
+android.accept_sdk_license = True
 
 [buildozer]
 log_level = 2
