@@ -23,11 +23,19 @@ jobs:
         pip install buildozer==1.5.0 cython==0.29.33
         pip install python-for-android==2023.9.16
 
-    - name: Build APK
+    - name: Accept Android licenses
       run: |
-        buildozer android debug
-      env:
-        BUILDOZER_WARN_ON_ROOT: 0
+        mkdir -p ~/.buildozer/android/platform
+        buildozer android debug || true
+        yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager \
+          --sdk_root=/home/runner/.buildozer/android/platform/android-sdk \
+          --licenses || true
+        yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager \
+          --sdk_root=/home/runner/.buildozer/android/platform/android-sdk \
+          "build-tools;37.0.0" || true
+
+    - name: Build APK
+      run: buildozer android debug
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
