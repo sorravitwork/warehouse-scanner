@@ -24,7 +24,6 @@ NOTES:
 """
 
 import os, sys, json, datetime, threading
-import numpy as np
 
 # ── Kivy config (must be BEFORE kivy imports) ──
 os.environ.setdefault("KIVY_NO_ENV_CONFIG", "0")
