@@ -18,7 +18,7 @@ requirements = python3,kivy,kivymd,opencv,numpy,openpyxl,pillow,pyzbar
 android.permissions = CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 android.api = 33
-android.minapi = 21
+android.minapi = 24
 android.ndk = 25b
 android.arch = arm64-v8a
 
