@@ -12,14 +12,14 @@ main = Scanner_Kivy_Mobile
 version = 1.0
 
 # ⚠️ These requirements match your imports
-requirements = python3,kivy,kivymd,opencv,numpy,openpyxl,pillow,pyzbar
+requirements = python3,kivy,kivymd,opencv,numpy==1.26.4,openpyxl,pillow,pyzbar
 
 # Permissions needed for camera + storage
 android.permissions = CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
 android.api = 33
 android.minapi = 24
-android.ndk = 25b
+android.ndk = 27b
 android.archs = arm64-v8a
 
 [buildozer]
