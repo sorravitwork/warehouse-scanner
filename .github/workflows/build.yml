@@ -1,13 +1,16 @@
 name: Build APK
-
 on: [push]
-
 jobs:
   build:
     runs-on: ubuntu-22.04
-
     steps:
     - uses: actions/checkout@v4
+
+    - name: Set up Java 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
 
     - name: Set up Python 3.11
       uses: actions/setup-python@v5
@@ -17,25 +20,22 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y git zip unzip openjdk-17-jdk \
+        sudo apt-get install -y git zip unzip \
           autoconf libtool libtool-bin pkg-config \
-          zlib1g-dev libncurses5-dev cmake libffi-dev libssl-dev gettext
+          zlib1g-dev libncurses5-dev cmake libffi-dev libssl-dev gettext \
+          libzbar0 libzbar-dev
         pip install buildozer==1.5.0 cython==0.29.33
-        pip install python-for-android==2023.9.16
-
-    - name: Accept Android licenses
-      run: |
-        mkdir -p ~/.buildozer/android/platform
-        buildozer android debug || true
-        yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager \
-          --sdk_root=/home/runner/.buildozer/android/platform/android-sdk \
-          --licenses || true
-        yes | /home/runner/.buildozer/android/platform/android-sdk/tools/bin/sdkmanager \
-          --sdk_root=/home/runner/.buildozer/android/platform/android-sdk \
-          "build-tools;37.0.0" || true
+        pip install python-for-android==2024.1.21
 
     - name: Build APK
-      run: buildozer android debug
+      run: |
+        export JAVA_HOME=$(dirname $(dirname $(readlink -f $(which java))))
+        buildozer android debug
+      env:
+        ANDROIDSDK: /home/runner/.buildozer/android/platform/android-sdk
+        ANDROIDNDK: /home/runner/.buildozer/android/platform/android-ndk-r25b
+        ANDROIDAPI: "33"
+        ANDROIDMINAPI: "24"
 
     - name: Upload APK
       uses: actions/upload-artifact@v4
