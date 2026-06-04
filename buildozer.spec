@@ -8,7 +8,7 @@ source.include_exts = py,png,jpg,kv,atlas,onnx,json
 
 version = 1.0
 
-requirements = python3,kivy,kivymd,opencv,numpy,openpyxl,pillow,pyzbar
+requirements = python3,kivy,kivymd,opencv,openpyxl,pillow,pyzbar
 
 android.permissions = CAMERA,READ_EXTERNAL_STORAGE,WRITE_EXTERNAL_STORAGE
 
