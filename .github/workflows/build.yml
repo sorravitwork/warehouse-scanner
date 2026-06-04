@@ -33,7 +33,7 @@ jobs:
         buildozer android debug
       env:
         ANDROIDSDK: /home/runner/.buildozer/android/platform/android-sdk
-        ANDROIDNDK: /home/runner/.buildozer/android/platform/android-ndk-r25b
+        ANDROIDNDK: /home/runner/.buildozer/android/platform/android-ndk-r27b
         ANDROIDAPI: "33"
         ANDROIDMINAPI: "24"
 
