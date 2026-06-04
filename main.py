@@ -25,6 +25,11 @@ NOTES:
 
 import os, sys, json, datetime, threading
 
+try:
+    import numpy as np
+except ImportError:
+    from cv2 import numpy as np
+    
 # ── Kivy config (must be BEFORE kivy imports) ──
 os.environ.setdefault("KIVY_NO_ENV_CONFIG", "0")
 
@@ -146,7 +151,8 @@ def train_model():
                     labels.append(idx)
                     label_map[idx] = code
     if faces and face_recognizer:
-        face_recognizer.train(faces, np.array(labels))
+        import array
+        face_recognizer.train(faces, cv2.array(labels) if hasattr(cv2, 'array') else __import__('array').array('i', labels))
         return label_map
     return None
 
